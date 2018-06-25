@@ -22,6 +22,7 @@ use Monolog\Formatter\LineFormatter;
  * [2000-01-01 00:00:00] app.DEBUG: Test message
  *
  * @author Mark White <mark@somsip.com>
+ * @package Somsip\BlcKnd
  */
 class CallerInlineFormatter extends LineFormatter
 {

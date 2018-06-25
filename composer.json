@@ -27,7 +27,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Somsip\\BlcKnd\\Logger\\LoggerServiceProvider"
+                "Somsip\\BlcKnd\\BlcKndServiceProvider"
             ]
         }
     }

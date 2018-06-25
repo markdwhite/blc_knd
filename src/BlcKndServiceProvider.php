@@ -4,20 +4,30 @@ declare(strict_types=1);
 namespace Somsip\BlcKnd\Logger;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
-use Somsip\BlcKnd\Mail\Handlers\LaravelMailerHandler;
 
 use Illuminate\Support\ServiceProvider;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RavenHandler;
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 
 use Log;
-use Raven_Client;
 
 class LoggerServiceProvider extends ServiceProvider
 {
+    /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'blc_knd');
+
+        $this->publishes([
+            __DIR__.'/config/blc_knd.php' => config_path('blc_knd.php'),
+        ]);
+    }
+
     /**
      * Register the logger
      *
@@ -41,8 +51,8 @@ class LoggerServiceProvider extends ServiceProvider
             // Email critical errors to admin
             $monolog->pushHandler(
                 new LaravelMailerHandler(
-                    config('mail.admin'),
-                    'NewsLetters: CRITICAL ERROR encountered on ' . app()->environment(),
+                    config('blc_knd.critical'),
+                    sprintf('%s %s %s: CRITICAL ERROR encountered', config('app.name'), app()->environment(), getLocalIp()),
                     Logger::CRITICAL
                 )
             );
