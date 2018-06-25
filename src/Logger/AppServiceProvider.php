@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Somsip\BlcKnd\Logger;
 
+use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
+
 use Illuminate\Support\ServiceProvider;
 
 use Monolog\Logger;
