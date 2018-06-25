@@ -12,7 +12,7 @@ use Monolog\Processor\IntrospectionProcessor;
 
 use Log;
 
-class LoggerServiceProvider extends ServiceProvider
+class BlcKndServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
