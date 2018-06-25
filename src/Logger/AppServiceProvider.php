@@ -5,12 +5,10 @@ namespace Somsip\BlcKnd\Logger;
 
 use Illuminate\Support\ServiceProvider;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RavenHandler;
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 
-use Raven_Client;
+use Log;
 
 class LoggerServiceProvider extends ServiceProvider
 {
