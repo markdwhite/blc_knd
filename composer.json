@@ -1,0 +1,27 @@
+{
+    "name": "somsip/blc_knd",
+    "description": "A collection of helper functions and classes for use in BLC/KND projects",
+    "type": "library",
+    "keywords": [
+    ],
+    "homepage": "https://github.com/markdwhite/blc_knd",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mark White",
+            "email": "mark@somsip.com",
+            "homepage": "https://github.com/markdwhite"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Somsip\\BlcKnd\\": "src/"
+        }
+    }
+}
