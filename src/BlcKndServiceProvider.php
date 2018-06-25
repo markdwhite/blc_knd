@@ -1,16 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Somsip\BlcKnd\Logger;
+namespace Somsip\BlcKnd;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
 
 use Illuminate\Support\ServiceProvider;
 
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\RavenHandler;
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 
 use Log;
+use Raven_Client;
 
 class BlcKndServiceProvider extends ServiceProvider
 {
