@@ -22,7 +22,11 @@
     "autoload": {
         "psr-4": {
             "Somsip\\BlcKnd\\": "src/"
-        }
+        },
+        "files": [
+            "vendor/Somsip/BlcKnd/Bootstrap/encrypted_env.php",
+            "vendor/Somsip/BlcKnd/Bootstrap/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {

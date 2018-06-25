@@ -13,7 +13,7 @@ return [
 
     'critical' => [
         'mark@somsip.com',
-        'paula@kindlenationdaily.com'
+    //    'paula@kindlenationdaily.com'
     ],
 
 ];
