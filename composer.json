@@ -24,8 +24,8 @@
             "Somsip\\BlcKnd\\": "src/"
         },
         "files": [
-            "Bootstrap/encrypted_env.php",
-            "Bootstrap/helpers.php"
+            "src/Bootstrap/encrypted_env.php",
+            "src/Bootstrap/helpers.php"
         ]
     },
     "extra": {
