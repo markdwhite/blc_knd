@@ -23,5 +23,12 @@
         "psr-4": {
             "Somsip\\BlcKnd\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Somsip\\BlcKnd\\Logger\\LoggerServiceProvider"
+            ]
+        }
     }
 }
