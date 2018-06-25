@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NewsLetters\Mail;
+namespace Somsip\BlcKnd\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Collection;
