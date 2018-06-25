@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Somsip\BlcKnd;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
+use Somsip\BlcKnd\Mail\Handlers\LaravelMailerHandler;
 
 use Illuminate\Support\ServiceProvider;
 
