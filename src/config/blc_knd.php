@@ -4,11 +4,8 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Critical emails to be sent to
+    | Critical email recipients
     |--------------------------------------------------------------------------
-    |
-    | List all emails to receive critical emails here
-    |
     */
 
     'critical' => [
