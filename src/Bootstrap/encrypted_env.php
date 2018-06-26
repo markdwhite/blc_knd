@@ -110,6 +110,7 @@ if (!function_exists('encrypt_env')) {
 
         // FIXME: Make this the only code once all servers on 18.04
         // Use openssl if mcrypt not installed
+        // @codeCoverageIgnoreStart
         if (!function_exists('mcrypt_decrypt')) {
             $method = 'AES-256-CBC';
             $ivSize = openssl_cipher_iv_length($method);
@@ -121,6 +122,7 @@ if (!function_exists('encrypt_env')) {
             $encrypted = base64_encode($iv . $encrypted);
             return "ENC:$encrypted";
         }
+        // @codeCoverageIgnoreEnd
 
         // create and randomized initial vector
         mt_srand(intval(microtime() * 1000000));
