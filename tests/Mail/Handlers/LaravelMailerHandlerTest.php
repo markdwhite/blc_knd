@@ -13,7 +13,7 @@ class LaravelMailerHandlerTest extends TestCase
     // Ensure config is loaded and all Facades are available
     protected function getPackageProviders($app)
     {
-        return ['Somsip\BlcKnd\BlcKndServiceProvider'];
+        return ['Somsip\BlcKnd\ServiceProvider'];
     }
 
     public function testSendNotThrottled()

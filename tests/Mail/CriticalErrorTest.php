@@ -23,6 +23,6 @@ class CriticalErrorTest extends TestCase
 
         $this->assertEquals($subject, $result->subject);
         $this->assertEquals($content, $result->content);
-        $this->assertEquals('emails.error', $result->view);
+        $this->assertEquals('blc_knd::emails.error', $result->view);
     }
 }
