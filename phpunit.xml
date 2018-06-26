@@ -11,9 +11,16 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/</directory>
+            <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory suffix=".php">src/views/</directory>
+            </exclude>
         </whitelist>
     </filter>
+
+    <php>
+        <env name="APP_KEY" value="base64:3D9/PR6TidKrLRvSjNjoeEpsQPTkgt/vfnDG5nLcTBM="/>
+    </php>
 
     <logging>
         <log type="coverage-html" target="tests/coverage" title="php-demo"

@@ -25,7 +25,7 @@ class BlcKndServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'blc_knd');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'blc_knd');
 
         $this->publishes([
             __DIR__.'/config/blc_knd.php' => config_path('blc_knd.php'),
@@ -40,6 +40,8 @@ class BlcKndServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/config/blc_knd.php', 'blc_knd');
+
         // Setup some custom logging
         $monolog = Log::getMonolog();
         // Change the default formatter

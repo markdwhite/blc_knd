@@ -2,7 +2,9 @@
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
 
-class CallerInlineFormatterTest extends PHPUnit_Framework_TestCase
+use Orchestra\Testbench\TestCase;
+
+class CallerInlineFormatterTest extends TestCase
 {
     public function testNew()
     {
