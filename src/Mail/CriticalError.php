@@ -43,6 +43,6 @@ class CriticalError extends Mailable
     public function build(): self
     {
         return $this->subject($this->subject)
-            ->view('emails.error');
+            ->view('blc_knd.emails.error');
     }
 }
