@@ -40,6 +40,7 @@ class LaravelMailerHandlerTest extends TestCase
                 && ($mailable->subject == 'App testing 127.0.0.1: CRITICAL ERROR encountered');
         });
         $this->assertTrue(Storage::has($filename));
+        $this->assertTrue(View::exists('blc_knd::emails.error'));
 
         Storage::delete($filename);
     }
