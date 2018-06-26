@@ -58,7 +58,12 @@ class BlcKndServiceProvider extends ServiceProvider
             $monolog->pushHandler(
                 new LaravelMailerHandler(
                     config('blc_knd.critical'),
-                    sprintf('%s %s %s: CRITICAL ERROR encountered', config('app.name'), app()->environment(), getLocalIp()),
+                    sprintf(
+                        '%s %s %s: CRITICAL ERROR encountered',
+                        config('app.name'),
+                        app()->environment(),
+                        getLocalIp()
+                    ),
                     Logger::CRITICAL
                 )
             );

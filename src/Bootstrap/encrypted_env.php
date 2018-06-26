@@ -57,27 +57,27 @@ if (!function_exists('encrypted_env')) {
  * @return string
  */
 if (!function_exists('decrypt_env')) {
-function decrypt_env(string $encoded): string
-{
-    // @codeCoverageIgnoreStart
-    if (!getenv('APP_KEY')) {
-        throw new RuntimeException('APP_KEY must be set in environmental variables');
+    function decrypt_env(string $encoded): string
+    {
+        // @codeCoverageIgnoreStart
+        if (!getenv('APP_KEY')) {
+            throw new RuntimeException('APP_KEY must be set in environmental variables');
+        }
+        // @codeCoverageIgnoreEnd
+
+        list($iv, $value) = unserialize(base64_decode(substr($encoded, 4)));
+
+        return rtrim(
+            mcrypt_decrypt(
+                MCRYPT_RIJNDAEL_256,
+                base64_decode(substr(getenv('APP_KEY'), 7)),
+                $value,
+                MCRYPT_MODE_CBC,
+                $iv
+            ),
+            "\0"
+        );
     }
-    // @codeCoverageIgnoreEnd
-
-    list($iv, $value) = unserialize(base64_decode(substr($encoded, 4)));
-
-    return rtrim(
-        mcrypt_decrypt(
-            MCRYPT_RIJNDAEL_256,
-            base64_decode(substr(getenv('APP_KEY'), 7)),
-            $value,
-            MCRYPT_MODE_CBC,
-            $iv
-        ),
-        "\0"
-    );
-}
 }
 
 /**

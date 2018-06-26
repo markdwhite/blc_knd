@@ -10,4 +10,12 @@ class HelpersTest extends TestCase
 
         $this->assertRegExp('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $ip);
     }
+
+    public function testGetLocalIpAlready()
+    {
+        getLocalIp();
+        $ip = getLocalIp();
+
+        $this->assertRegExp('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $ip);
+    }
 }

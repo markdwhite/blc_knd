@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="NewsLetters">
+    <description>PSR2 with exclusions</description>
+    <exclude-pattern>build/*</exclude-pattern>
+    <exclude-pattern>src/views/*</exclude-pattern>
+    <exclude-pattern>vendor</exclude-pattern>
+
+    <rule ref="PSR2">
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+</ruleset>

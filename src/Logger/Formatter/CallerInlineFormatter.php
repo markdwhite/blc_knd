@@ -42,7 +42,7 @@ class CallerInlineFormatter extends LineFormatter
         } else {
             if ($class) {
                 $function = '{undefined}() ';
-            } 
+            }
         }
         $record['message'] = sprintf('%s%s%s', $class, $function, $record['message']);
 
