@@ -42,7 +42,7 @@ class LoggerServiceProvider extends ServiceProvider
             $monolog->pushHandler(
                 new LaravelMailerHandler(
                     config('mail.admin'),
-                    'NewsLetters: CRITICAL ERROR encountered on ' . app()->environment(),
+                    config('app.name') . ': CRITICAL ERROR encountered on ' . app()->environment(),
                     Logger::CRITICAL
                 )
             );
