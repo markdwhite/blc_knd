@@ -38,10 +38,10 @@ class CommandWithHealthcheck extends Command
      */
     protected function pingHealthcheck()
     {
-        if (app()->environment('production') && config('app.healthcheckUrl')) {
+        if (app()->environment('production') && config('blc_knd.healthcheck_url')) {
             $url = sprintf(
                 '%s/cronjob?ip=%s&name=%s',
-                config('app.healthcheckUrl'),
+                config('blc_knd.healthcheck_url'),
                 getLocalIp(),
                 $this->signature
             );

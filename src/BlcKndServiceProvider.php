@@ -68,9 +68,9 @@ class BlcKndServiceProvider extends ServiceProvider
                 )
             );
             // Log errors to sentry
-            if (config('services.raven.dsn')) {
+            if (config('blc_knd.sentry_url')) {
                 $monolog = Log::getMonolog();
-                $client = new Raven_Client(config('services.raven.dsn'));
+                $client = new Raven_Client(config('blc_knd.sentry_url'));
                 $handler = new RavenHandler(
                     $client,
                     Logger::ERROR
