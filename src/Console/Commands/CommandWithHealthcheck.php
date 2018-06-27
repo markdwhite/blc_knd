@@ -61,4 +61,18 @@ class CommandWithHealthcheck extends Command
             }
         }
     }
+
+    /**
+     * Pauses to avoid throttling
+     *
+     * @param int $seconds
+     * @return void
+     * @codeCoverageIgnore
+     */
+    protected function pause(int $seconds = 1)
+    {
+        if (!app()->environment('testing')) {
+            sleep($seconds);
+        }
+    }
 }
