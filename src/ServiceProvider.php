@@ -33,6 +33,7 @@ class ServiceProvider extends BaseServiceProvider
         ]);
 
         // Log all DB SELECT statements to check indexes
+        // Parse with: grep ") sql:" laravel.log | sed -e "s#.*select\(.*\)\[\]#select\1#" | sort -u
         // @codeCoverageIgnoreStart
         if (!app()->environment('testing') && config('blc_knd.log_sql')) {
             DB::listen(function ($query) {
