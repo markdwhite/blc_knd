@@ -34,7 +34,7 @@ class ServiceProvider extends BaseServiceProvider
 
         // Log all DB SELECT statements to check indexes
         // @codeCoverageIgnoreStart
-        if (!app()->environment('testing') && config('app.log_sql')) {
+        if (!app()->environment('testing') && config('blc_knd.log_sql')) {
             DB::listen(function ($query) {
                 if (preg_match('/^select/', $query->sql)) {
                     Log::info('sql: ' .  $query->sql);
