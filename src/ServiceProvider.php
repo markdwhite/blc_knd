@@ -13,6 +13,7 @@ use Monolog\Handler\RavenHandler;
 use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 
+use DB;
 use Log;
 use Raven_Client;
 
@@ -30,6 +31,17 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/config/blc_knd.php' => config_path('blc_knd.php'),
         ]);
+
+        // Log all DB SELECT statements to check indexes
+        // @codeCoverageIgnoreStart
+        if (!app()->environment('testing') && config('app.log_sql')) {
+            DB::listen(function ($query) {
+                if (preg_match('/^select/', $query->sql)) {
+                    Log::info('sql: ' .  $query->sql);
+                }
+            });
+        }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
