@@ -10,7 +10,7 @@ use Monolog\Logger as Monolog;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
 
-class InlineFormatter
+class CustomInlineFormatter
 {
     /**
      * Customize the given logger instance.
