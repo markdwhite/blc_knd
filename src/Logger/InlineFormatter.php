@@ -10,12 +10,12 @@ use Monolog\Logger as Monolog;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
 
-class CustomInlineFormatter
+class InlineFormatter
 {
     /**
      * Customize the given logger instance.
      *
-     * @param  \Illuminate\Log\Logger  $logger
+     * @param \Illuminate\Log\Logger $logger
      * @return void
      */
     public function __invoke(Logger $logger)
