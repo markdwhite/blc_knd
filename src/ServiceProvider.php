@@ -55,42 +55,42 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/config/blc_knd.php', 'blc_knd');
 
-        // Setup some custom logging
-        $monolog = Log::getMonolog();
-        // Change the default formatter
-        $monolog->getHandlers()[0]->setFormatter(new CallerInlineFormatter());
-        // Get all output from logger, but ignore references to non-app classes
-        $ignores = [
-            'Writer',
-            'Facade'
-        ];
-        $monolog->pushProcessor(new IntrospectionProcessor(Logger::DEBUG, $ignores));
-
-        if (app()->environment('production')) {
-            // Email critical errors to admin
-            $monolog->pushHandler(
-                new LaravelMailerHandler(
-                    config('blc_knd.critical'),
-                    sprintf(
-                        '%s %s %s: CRITICAL ERROR encountered',
-                        config('app.name'),
-                        app()->environment(),
-                        getLocalIp()
-                    ),
-                    Logger::CRITICAL
-                )
-            );
-            // Log errors to sentry
-            if (config('blc_knd.sentry_url')) {
-                $monolog = Log::getMonolog();
-                $client = new Raven_Client(config('blc_knd.sentry_url'));
-                $handler = new RavenHandler(
-                    $client,
-                    Logger::ERROR
-                );
-                $handler->setFormatter(new LineFormatter("%message% %context% %extra%\n"));
-                $monolog->pushHandler($handler);
-            }
-        }
+//        // Setup some custom logging
+//        $monolog = Log::getMonolog();
+//        // Change the default formatter
+//        $monolog->getHandlers()[0]->setFormatter(new CallerInlineFormatter());
+//        // Get all output from logger, but ignore references to non-app classes
+//        $ignores = [
+//            'Writer',
+//            'Facade'
+//        ];
+//        $monolog->pushProcessor(new IntrospectionProcessor(Logger::DEBUG, $ignores));
+//
+//        if (app()->environment('production')) {
+//            // Email critical errors to admin
+//            $monolog->pushHandler(
+//                new LaravelMailerHandler(
+//                    config('blc_knd.critical'),
+//                    sprintf(
+//                        '%s %s %s: CRITICAL ERROR encountered',
+//                        config('app.name'),
+//                        app()->environment(),
+//                        getLocalIp()
+//                    ),
+//                    Logger::CRITICAL
+//                )
+//            );
+//            // Log errors to sentry
+//            if (config('blc_knd.sentry_url')) {
+//                $monolog = Log::getMonolog();
+//                $client = new Raven_Client(config('blc_knd.sentry_url'));
+//                $handler = new RavenHandler(
+//                    $client,
+//                    Logger::ERROR
+//                );
+//                $handler->setFormatter(new LineFormatter("%message% %context% %extra%\n"));
+//                $monolog->pushHandler($handler);
+//            }
+//        }
     }
 }
