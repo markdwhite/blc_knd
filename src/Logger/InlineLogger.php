@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Somsip\BlcKnd\Logging;
 
-use Monolog\Handler\StreamHandler;
+use Illuminate\Log\Logger;
+
 use Monolog\Processor\IntrospectionProcessor;
-use Monolog\Logger;
+use Monolog\Logger as Monolog;
 
 use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
 
@@ -14,23 +15,21 @@ class InlineLogger
     /**
      * Customize the given logger instance.
      *
-     * @param array $config
-     * @return \Monolog\Logger
+     * @param \Illuminate\Log\Logger $logger
+     * @return void
      */
-    public function __invoke(array $config): Logger
+    public function __invoke(Logger $logger)
     {
-        $handler = new StreamHandler($config['path'], Logger::DEBUG, true, null, false);
-        $handler->setFormatter(new CallerInlineFormatter());
-
+        // If we do this here, we can tap into any log channel
         $ignores = [
             'Facade',
             'Logger',
             'LogManager'
         ];
-        $processor = new IntrospectionProcessor(Logger::DEBUG, $ignores);
+        $logger->pushProcessor(new IntrospectionProcessor(Monolog::DEBUG, $ignores));
 
-        $logger = new Logger(app()->environment(), [$handler], [$processor]);
-
-        return $logger;
+        foreach ($logger->getHandlers() as $handler) {
+            $handler->setFormatter(new CallerInlineFormatter());
+        }
     }
 }
