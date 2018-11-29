@@ -57,14 +57,6 @@ class ServiceProvider extends BaseServiceProvider
 
 //        // Setup some custom logging
 //        $monolog = Log::getMonolog();
-//        // Change the default formatter
-//        $monolog->getHandlers()[0]->setFormatter(new CallerInlineFormatter());
-//        // Get all output from logger, but ignore references to non-app classes
-//        $ignores = [
-//            'Writer',
-//            'Facade'
-//        ];
-//        $monolog->pushProcessor(new IntrospectionProcessor(Logger::DEBUG, $ignores));
 //
 //        if (app()->environment('production')) {
 //            // Email critical errors to admin

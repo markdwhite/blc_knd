@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Somsip\BlcKnd\Mail\Handlers;
+namespace Somsip\BlcKnd\Logger\Handlers;
 
 use Somsip\BlcKnd\Mail\CriticalError;
 

@@ -1,6 +1,6 @@
 <?php
 
-use Somsip\BlcKnd\Mail\Handlers\LaravelMailerHandler;
+use Somsip\BlcKnd\Logger\Handlers\LaravelMailerHandler;
 use Somsip\BlcKnd\Mail\CriticalError;
 
 use Monolog\Logger;
