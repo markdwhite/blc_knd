@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Somsip\BlcKnd\Logging;
+namespace Somsip\BlcKnd\Logger;
 
 use Illuminate\Log\Logger;
 
