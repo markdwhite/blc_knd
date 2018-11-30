@@ -59,19 +59,6 @@ class ServiceProvider extends BaseServiceProvider
 //        $monolog = Log::getMonolog();
 //
 //        if (app()->environment('production')) {
-//            // Email critical errors to admin
-//            $monolog->pushHandler(
-//                new LaravelMailerHandler(
-//                    config('blc_knd.critical'),
-//                    sprintf(
-//                        '%s %s %s: CRITICAL ERROR encountered',
-//                        config('app.name'),
-//                        app()->environment(),
-//                        getLocalIp()
-//                    ),
-//                    Logger::CRITICAL
-//                )
-//            );
 //            // Log errors to sentry
 //            if (config('blc_knd.sentry_url')) {
 //                $monolog = Log::getMonolog();

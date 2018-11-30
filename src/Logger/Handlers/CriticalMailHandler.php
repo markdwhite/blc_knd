@@ -17,8 +17,6 @@ use Storage;
  * CriticalMailHandler uses the Laravel Mail facade to send the emails
  *
  * @author Mark White mark@somsip.com>
- * @author Christophe Coevoet <stof@notk.org>
- * @author Mark Garrett <mark@moderndeveloperllc.com>
  * @copyright 2018 Somsip.com
  * @package Somsip\BlcKnd
  */
