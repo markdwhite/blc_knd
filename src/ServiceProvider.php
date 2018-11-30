@@ -54,22 +54,5 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/blc_knd.php', 'blc_knd');
-
-//        // Setup some custom logging
-//        $monolog = Log::getMonolog();
-//
-//        if (app()->environment('production')) {
-//            // Log errors to sentry
-//            if (config('blc_knd.sentry_url')) {
-//                $monolog = Log::getMonolog();
-//                $client = new Raven_Client(config('blc_knd.sentry_url'));
-//                $handler = new RavenHandler(
-//                    $client,
-//                    Logger::ERROR
-//                );
-//                $handler->setFormatter(new LineFormatter("%message% %context% %extra%\n"));
-//                $monolog->pushHandler($handler);
-//            }
-//        }
     }
 }
