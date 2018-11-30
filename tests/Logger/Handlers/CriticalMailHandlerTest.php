@@ -17,7 +17,7 @@ class CriticalMailHandlerTest extends TestCase
 
     public function testNew()
     {
-        $handler = new CriticalMailHandler('to', 'subject');
+        $handler = new CriticalMailHandler();
 
         $this->assertInstanceOf(CriticalMailHandler::class, $handler);
     }
