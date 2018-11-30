@@ -1,13 +1,13 @@
 <?php
 
-use Somsip\BlcKnd\Logger\Handlers\LaravelMailerHandler;
+use Somsip\BlcKnd\Logger\Handlers\CriticalMailHandler;
 use Somsip\BlcKnd\Mail\CriticalError;
 
 use Monolog\Logger;
 
 use Orchestra\Testbench\TestCase;
 
-class LaravelMailerHandlerTest extends TestCase
+class CriticalMailHandlerTest extends TestCase
 {
     // Ensure config is loaded and all Facades are available
     protected function getPackageProviders($app)
@@ -17,22 +17,18 @@ class LaravelMailerHandlerTest extends TestCase
 
     public function testNew()
     {
-        $handler = new LaravelMailerHandler('to', 'subject');
+        $handler = new CriticalMailHandler('to', 'subject');
 
-        $this->assertInstanceOf(LaravelMailerHandler::class, $handler);
+        $this->assertInstanceOf(CriticalMailHandler::class, $handler);
     }
 
     public function testSendNotThrottled()
     {
-        $subject = sprintf('App %s %s: CRITICAL ERROR encountered', app()->environment(), '127.0.0.1');
+        $subject = sprintf('Laravel %s %s: CRITICAL ERROR encountered', app()->environment(), '127.0.0.1');
         $filename = 'email_throttle_' . md5($subject);
         Storage::delete($filename);
 
-        $handler = new LaravelMailerHandler(
-            config('blc_knd.critical'),
-            $subject,
-            Logger::CRITICAL
-        );
+        $handler = new CriticalMailHandler();
         $content = 'This is a test';
 
         // Make protected method public
@@ -44,7 +40,7 @@ class LaravelMailerHandlerTest extends TestCase
 
         Mail::assertSent(CriticalError::class, function ($mailable) {
             return $mailable->hasTo(config('blc_knd.critical')[0])
-                && ($mailable->subject == 'App testing 127.0.0.1: CRITICAL ERROR encountered');
+                && ($mailable->subject == 'Laravel testing 127.0.0.1: CRITICAL ERROR encountered');
         });
         $this->assertTrue(Storage::has($filename));
         $this->assertTrue(View::exists('blc_knd::emails.error'));
@@ -54,15 +50,11 @@ class LaravelMailerHandlerTest extends TestCase
 
     public function testSendThrottled()
     {
-        $subject = sprintf('App %s %s: CRITICAL ERROR encountered', app()->environment(), '127.0.0.1');
+        $subject = sprintf('Laravel %s %s: CRITICAL ERROR encountered', app()->environment(), '127.0.0.1');
         $filename = 'email_throttle_' . md5($subject);
         Storage::put($filename, 'test');
 
-        $handler = new LaravelMailerHandler(
-            config('blc_knd.critical'),
-            $subject,
-            Logger::CRITICAL
-        );
+        $handler = new CriticalMailHandler();
         $content = 'This is a test';
 
         // Make protected method public

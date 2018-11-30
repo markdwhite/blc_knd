@@ -14,7 +14,7 @@ use Mail;
 use Storage;
 
 /**
- * LaravelMailerHandler uses the Laravel Mail facade to send the emails
+ * CriticalMailHandler uses the Laravel Mail facade to send the emails
  *
  * @author Mark White mark@somsip.com>
  * @author Christophe Coevoet <stof@notk.org>
@@ -22,7 +22,7 @@ use Storage;
  * @copyright 2018 Somsip.com
  * @package Somsip\BlcKnd
  */
-class LaravelMailerHandler extends MailHandler
+class CriticalMailHandler extends MailHandler
 {
     const THROTTLE_MINUTES = 5;
 
@@ -39,16 +39,19 @@ class LaravelMailerHandler extends MailHandler
     protected $subject;
 
     /**
-     * @param string|array $to             The receiver of the mail
-     * @param string       $subject        The subject of the mail
      * @param integer      $level          The minimum logging level at which this handler will be triggered
      * @param boolean      $bubble         Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($to, $subject, $level = Logger::ERROR, $bubble = true)
+    public function __construct($level = Logger::CRITICAL, $bubble = true)
     {
         parent::__construct($level, $bubble);
-        $this->to = is_array($to) ? $to : [$to];
-        $this->subject = $subject;
+        $this->to = (array) config('blc_knd.critical');
+        $this->subject = sprintf(
+            '%s %s %s: CRITICAL ERROR encountered',
+            config('app.name'),
+            app()->environment(),
+            getLocalIp()
+        );
     }
 
     /**
