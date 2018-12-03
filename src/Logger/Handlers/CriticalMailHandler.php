@@ -25,12 +25,6 @@ class CriticalMailHandler extends MailHandler
     const THROTTLE_MINUTES = 5;
 
     /**
-     * The email addresses to which the message will be sent
-     * @var array
-     */
-    protected $to;
-
-    /**
      * The subject of the email
      * @var string
      */
@@ -43,13 +37,6 @@ class CriticalMailHandler extends MailHandler
     public function __construct($level = Logger::CRITICAL, $bubble = true)
     {
         parent::__construct($level, $bubble);
-        $this->to = (array) config('blc_knd.critical');
-        $this->subject = sprintf(
-            '%s %s %s: CRITICAL ERROR encountered',
-            config('app.name'),
-            app()->environment(),
-            getLocalIp()
-        );
     }
 
     /**
@@ -57,11 +44,19 @@ class CriticalMailHandler extends MailHandler
      */
     protected function send($content, array $records)
     {
+        $to = (array) config('blc_knd.critical');
+        $this->subject = sprintf(
+            '%s %s %s: CRITICAL ERROR encountered',
+            config('app.name'),
+            app()->environment(),
+            getLocalIp()
+        );
+
         if ($this->isThrottled()) {
             return;
         }
 
-        Mail::to($this->to)
+        Mail::to($to)
             ->send(new CriticalError($this->subject, $content));
     }
 
