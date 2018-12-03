@@ -17,10 +17,10 @@ class InlineLoggerTest extends TestCase
         $mockHandler = Mockery::mock(StreamHandler::class);
         $mockHandler->shouldReceive('setFormatter')
             ->once();
+        $mockHandler->shouldReceive('pushProcessor')
+            ->once();
 
         $mockLogger = Mockery::mock(Logger::class)->makePartial();
-        $mockLogger->shouldReceive('pushProcessor')
-            ->once();
         $mockLogger->shouldReceive('getHandlers')
             ->once()
             ->andReturn([$mockHandler]);
