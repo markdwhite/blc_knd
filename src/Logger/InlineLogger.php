@@ -28,7 +28,6 @@ class InlineLogger
         ];
 
         foreach ($logger->getHandlers() as $handler) {
-            $handler->setFormatter(new CallerInlineFormatter());
             $handler->pushProcessor(new IntrospectionProcessor(Monolog::DEBUG, $ignores));
         }
     }
