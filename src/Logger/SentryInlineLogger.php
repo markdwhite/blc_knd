@@ -8,7 +8,7 @@ use Illuminate\Log\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Logger as Monolog;
 
-use Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter;
+use Somsip\BlcKnd\Logger\Formatter\SentryCallerInlineFormatter;
 
 class SentryInlineLogger
 {
