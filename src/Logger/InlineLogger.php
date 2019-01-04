@@ -28,8 +28,18 @@ class InlineLogger
         ];
 
         foreach ($logger->getHandlers() as $handler) {
-            $handler->setFormatter(new CallerInlineFormatter());
+            $handler->setFormatter($this->getFormatter());
             $handler->pushProcessor(new IntrospectionProcessor(Monolog::DEBUG, $ignores));
         }
+    }
+
+    /**
+     * Returns the formatter to be used
+     *
+     * @return \Somsip\BlcKnd\Logger\Formatter\CallerInlineFormatter
+     */
+    protected function getFormatter(): CallerInlineFormatter
+    {
+        return new CallerInlineFormatter();
     }
 }

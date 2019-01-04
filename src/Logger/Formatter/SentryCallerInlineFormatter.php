@@ -11,16 +11,16 @@ use Monolog\Formatter\LineFormatter;
  * Examples:
  *
  * Class and method
- * [2000-01-01 00:00:00] app.DEBUG: Class::method() Test message
+ * Class::method() Test message
  *
  * Function call
- * [2000-01-01 00:00:00] app.DEBUG: function() Test message
+ * function() Test message
  *
  * Class but method not identified
- * [2000-01-01 00:00:00] app.DEBUG: Class::{undefined}() Test message
+ * Class::{undefined}() Test message
  *
  * No class or function identified
- * [2000-01-01 00:00:00] app.DEBUG: Test message
+ * Test message
  *
  * @author Mark White <mark@somsip.com>
  * @package Somsip\BlcKnd
