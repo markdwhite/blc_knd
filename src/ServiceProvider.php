@@ -16,6 +16,7 @@ use Monolog\Processor\IntrospectionProcessor;
 use DB;
 use Log;
 use Raven_Client;
+use Storage;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -33,14 +34,23 @@ class ServiceProvider extends BaseServiceProvider
         ]);
 
         // Log all DB SELECT statements to check indexes
-        // Parse with: grep ") sql:" laravel.log | sed -e "s#.*select\(.*\)\[\]#select\1#" | sort -u
+        // Parse with: grep "sql:" sql.log | sed -e "s#.*select\(.*\)\[\]#select\1#" | sort | uniq -c | sort -bgr
         // @codeCoverageIgnoreStart
-        if (!app()->environment('testing') && config('blc_knd.log_sql')) {
-            DB::listen(function ($query) {
-                if (preg_match('/^select/', $query->sql)) {
-                    Log::info('sql: ' .  $query->sql);
-                }
-            });
+        if (config('blc_knd.log_sql')) {
+            // Use Storage when testing as Log causes problems with expectations on Log::shouldReceive()
+            if (app()->environment('testing')) {
+                DB::listen(function ($query) {
+                    if (preg_match('/^select/', $query->sql)) {
+                        Storage::append('sql.log', 'sql: ' .  $query->sql);
+                    }
+                });
+            } else {
+                DB::listen(function ($query) {
+                    if (preg_match('/^select/', $query->sql)) {
+                        Log::info('sql: ' .  $query->sql);
+                    }
+                });
+            }
         }
         // @codeCoverageIgnoreEnd
     }
