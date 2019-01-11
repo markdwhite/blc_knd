@@ -40,8 +40,8 @@ class ServiceProvider extends BaseServiceProvider
             // Use Storage when testing as Log causes problems with expectations on Log::shouldReceive()
             if (app()->environment('testing')) {
                 DB::listen(function ($query) {
-                    if (preg_match('/^select/', $query->sql)) {
-                        Storage::append('sql.log', 'sql: ' .  $query->sql);
+                    if (preg_match('/^select/', (string) $query->sql)) {
+                        Storage::append('sql.log', 'sql: ' . (string) $query->sql);
                     }
                 });
             } else {
