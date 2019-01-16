@@ -42,7 +42,7 @@ class ServiceProvider extends BaseServiceProvider
                 DB::listen(function ($query) {
                     if (preg_match('/^select/', (string) $query->sql)) {
                         $sql = vsprintf(
-                            str_replace('?', '%s', str_replace('"', '', (string) $query->sql)), $query->bindings
+                            str_replace('?', '"%s"', str_replace('"', '', (string) $query->sql)), $query->bindings
                         );
                         Storage::append('sql.log', 'sql: ' . $sql);
                     }
@@ -51,7 +51,7 @@ class ServiceProvider extends BaseServiceProvider
                 DB::listen(function ($query) {
                     if (preg_match('/^select/', (string) $query->sql)) {
                         $sql = vsprintf(
-                            str_replace('?', '%s', str_replace('"', '', (string) $query->sql)), $query->bindings
+                            str_replace('?', '"%s"', str_replace('"', '', (string) $query->sql)), $query->bindings
                         );
                         Log::info('sql: ' .  $sql);
                     }
