@@ -41,13 +41,15 @@ class ServiceProvider extends BaseServiceProvider
             if (app()->environment('testing')) {
                 DB::listen(function ($query) {
                     if (preg_match('/^select/', (string) $query->sql)) {
-                        Storage::append('sql.log', 'sql: ' . (string) $query->sql);
+                        $sql = vsprintf(str_replace('?', '%s', (string) $query->sql), $query->bindings);
+                        Storage::append('sql.log', 'sql: ' . $sql);
                     }
                 });
             } else {
                 DB::listen(function ($query) {
-                    if (preg_match('/^select/', $query->sql)) {
-                        Log::info('sql: ' .  $query->sql);
+                    if (preg_match('/^select/', (string) $query->sql)) {
+                        $sql = vsprintf(str_replace('?', '%s', (string) $query->sql), $query->bindings);
+                        Log::info('sql: ' .  $sql);
                     }
                 });
             }
