@@ -27,5 +27,6 @@ return [
     */
 
     'log_sql' => env('LOG_SQL'),
+    'log_sql_params' => env('LOG_SQL_PARAMS'),
 
 ];

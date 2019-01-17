@@ -42,7 +42,7 @@ class ServiceProvider extends BaseServiceProvider
                 DB::listen(function ($query) {
                     $sql = (string) $query->sql;
                     if (preg_match('/^select/', $sql)) {
-                        if (config('blc_knd.log_sql') == 'FULL') {
+                        if (config('blc_knd.log_sql_params')) {
                             // Apply bindings to placeholders as well as possible
                             $sql = vsprintf(
                                 str_replace('?', '"%s"', str_replace('"', '', $sql)), $query->bindings
@@ -55,7 +55,7 @@ class ServiceProvider extends BaseServiceProvider
                 DB::listen(function ($query) {
                     $sql = (string) $query->sql;
                     if (preg_match('/^select/', $sql)) {
-                        if (config('blc_knd.log_sql') == 'FULL') {
+                        if (config('blc_knd.log_sql_params')) {
                             // Apply bindings to placeholders as well as possible
                             $sql = vsprintf(
                                 str_replace('?', '"%s"', $sql), $query->bindings
