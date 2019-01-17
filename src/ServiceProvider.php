@@ -40,19 +40,27 @@ class ServiceProvider extends BaseServiceProvider
             // Use Storage when testing as Log causes problems with expectations on Log::shouldReceive()
             if (app()->environment('testing')) {
                 DB::listen(function ($query) {
-                    if (preg_match('/^select/', (string) $query->sql)) {
-                        $sql = vsprintf(
-                            str_replace('?', '"%s"', str_replace('"', '', (string) $query->sql)), $query->bindings
-                        );
+                    $sql = (string) $query->sql;
+                    if (preg_match('/^select/', $sql)) {
+                        if (config('blc_knd.log_sql') == 'FULL') {
+                            // Apply bindings to placeholders as well as possible
+                            $sql = vsprintf(
+                                str_replace('?', '"%s"', str_replace('"', '', $sql)), $query->bindings
+                            );
+                        }
                         Storage::append('sql.log', 'sql: ' . $sql);
                     }
                 });
             } else {
                 DB::listen(function ($query) {
-                    if (preg_match('/^select/', (string) $query->sql)) {
-                        $sql = vsprintf(
-                            str_replace('?', '"%s"', str_replace('"', '', (string) $query->sql)), $query->bindings
-                        );
+                    $sql = (string) $query->sql;
+                    if (preg_match('/^select/', $sql)) {
+                        if (config('blc_knd.log_sql') == 'FULL') {
+                            // Apply bindings to placeholders as well as possible
+                            $sql = vsprintf(
+                                str_replace('?', '"%s"', $sql), $query->bindings
+                            );
+                        }
                         Log::info('sql: ' .  $sql);
                     }
                 });
