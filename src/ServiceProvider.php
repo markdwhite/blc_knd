@@ -16,7 +16,6 @@ use Monolog\Processor\IntrospectionProcessor;
 use DB;
 use Log;
 use Raven_Client;
-use Storage;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -37,12 +36,12 @@ class ServiceProvider extends BaseServiceProvider
         // Parse with: grep "sql:" sql.log | sed -e "s#.*select\(.*\)\[\]#select\1#" | sort | uniq -c | sort -bgr
         // @codeCoverageIgnoreStart
         if (config('blc_knd.log_sql')) {
-            // Use Storage when testing as Log causes problems with expectations on Log::shouldReceive()
+            // Use file_put_contents() when testing as Log causes problems with expectations on Log::shouldReceive()
             if (app()->environment('testing')) {
                 DB::listen(function ($query) {
                     $sql = (string) $query->sql;
                     if (preg_match('/^select/', $sql)) {
-                        Storage::append('sql.log', 'sql: ' . $sql);
+                        file_put_contents(storage_path('logs') . '/sql.log', $sql . PHP_EOL, FILE_APPEND);
                     }
                 });
             } else {
