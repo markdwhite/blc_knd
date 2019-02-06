@@ -33,7 +33,7 @@ class ServiceProvider extends BaseServiceProvider
         ]);
 
         // Log all DB SELECT statements to check indexes
-        // Parse with: grep "sql:" sql.log | sed -e "s#.*select\(.*\)\[\]#select\1#" | sort | uniq -c | sort -bgr
+        // Parse with: grep "sql:" sql.log | sed -e "s#.*sql: \(.*\)\[\]#select\1#" | sort | uniq -c | sort -bgr
         // @codeCoverageIgnoreStart
         if (config('blc_knd.log_sql')) {
             // Use file_put_contents() when testing as Log causes problems with expectations on Log::shouldReceive()
@@ -41,7 +41,7 @@ class ServiceProvider extends BaseServiceProvider
                 DB::listen(function ($query) {
                     $sql = (string) $query->sql;
                     if (preg_match('/^select/', $sql)) {
-                        file_put_contents(storage_path('logs') . '/sql.log', $sql . PHP_EOL, FILE_APPEND);
+                        file_put_contents(storage_path('logs') . '/sql.log', 'sql: ' . $sql . PHP_EOL, FILE_APPEND);
                     }
                 });
             } else {
