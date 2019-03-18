@@ -69,11 +69,4 @@ class EncryptedEnvTest extends TestCase
 
         $this->assertEquals("quoted", $decrypted);
     }
-
-    public function testEncryptedEnvIsFalsey()
-    {
-        $decrypted = encrypted_env('falsey');
-
-        $this->assertNull($decrypted);
-    }
 }

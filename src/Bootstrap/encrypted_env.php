@@ -16,12 +16,12 @@ if (!function_exists('encrypted_env')) {
     {
         $value = env($key, false);
 
-        if ($value === false) {
+        if (is_null($value)) {
             return value($default);
         }
 
-        if (strpos($value, '"') === 0 && substr($value, -1) === '"') {
-            $value = substr($value, 1, -1);
+        if (is_bool($value)) {
+            return value($value);
         }
 
         // Checks for an encoded ENV
