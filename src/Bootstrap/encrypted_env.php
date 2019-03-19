@@ -14,7 +14,7 @@ if (!function_exists('encrypted_env')) {
      */
     function encrypted_env(string $key, $default = null)
     {
-        $value = env($key, false);
+        $value = env($key, $default);
 
         if (is_null($value)) {
             return value($default);
