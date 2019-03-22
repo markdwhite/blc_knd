@@ -48,7 +48,7 @@ trait RunsWebServer
         $command = PHP_BINARY . " -d variables_order=EGPCS -S $host:$port -t public -f server.php";
         return Process::fromShellCommandLine(
             $command,
-            realpath(__DIR__.'/../'),
+            getcwd(),
             [
                 'APP_ENV' => env('APP_ENV'),
                 'APP_URL' => env('APP_URL'),
