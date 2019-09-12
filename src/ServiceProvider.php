@@ -31,29 +31,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/config/blc_knd.php' => config_path('blc_knd.php'),
         ]);
-
-        // Log all DB SELECT statements to check indexes
-        // Parse with: grep "sql:" sql.log | sed -e "s#.*sql: \(.*\)\[\]#select\1#" | sort | uniq -c | sort -bgr
-        // @codeCoverageIgnoreStart
-        if (config('blc_knd.log_sql')) {
-            // Use file_put_contents() when testing as Log causes problems with expectations on Log::shouldReceive()
-            if (app()->environment('testing')) {
-                DB::listen(function ($query) {
-                    $sql = (string) $query->sql;
-                    if (preg_match('/^\s*select/i', $sql)) {
-                        file_put_contents(storage_path('logs') . '/sql.log', 'sql: ' . $sql . PHP_EOL, FILE_APPEND);
-                    }
-                });
-            } else {
-                DB::listen(function ($query) {
-                    $sql = (string) $query->sql;
-                    if (preg_match('/^\s*select/i', $sql)) {
-                        Log::info('sql: ' .  $sql);
-                    }
-                });
-            }
-        }
-        // @codeCoverageIgnoreEnd
     }
 
     /**
