@@ -12,7 +12,8 @@ use Log as LaravelLog;
 
 /**
  * Will log all N+1 queries identified by QueryDetector as critical. With a normal config this will send an
- * immediate email and log the error to Sentry
+ * immediate email and log the error to Sentry. Though beyondcode/laravel-query-detector must be in 'require'
+ * section of composer.json and not just 'dev' for this to work on production.
  *
  * Enable query detection in .env
  * QUERY_DETECTOR_ENABLED=true
