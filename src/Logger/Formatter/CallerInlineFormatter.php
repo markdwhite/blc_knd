@@ -31,7 +31,7 @@ class CallerInlineFormatter extends LineFormatter
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(array $record): string
     {
         // Append class and function to the message
         if ($class = $this->extractClass($record['extra'])) {
@@ -55,7 +55,7 @@ class CallerInlineFormatter extends LineFormatter
      * @param array $extra
      * @return string
      */
-    private function extractClass(array $extra)
+    private function extractClass(array $extra): string
     {
         if (!isset($extra['class'])) {
             return '';
@@ -76,7 +76,7 @@ class CallerInlineFormatter extends LineFormatter
      * @param array $extra
      * @return string
      */
-    private function extractFunction(array $extra)
+    private function extractFunction(array $extra): string
     {
         if (!isset($extra['function'])) {
             return '';
