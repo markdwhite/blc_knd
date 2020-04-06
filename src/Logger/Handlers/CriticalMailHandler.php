@@ -42,7 +42,7 @@ class CriticalMailHandler extends MailHandler
     /**
      * {@inheritdoc}
      */
-    protected function send($content, array $records)
+    protected function send($content, array $records): void
     {
         $to = (array) config('blc_knd.critical');
         $this->subject = sprintf(
