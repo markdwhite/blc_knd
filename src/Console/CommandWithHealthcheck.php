@@ -48,7 +48,7 @@ class CommandWithHealthcheck extends Command
             do {
                 // Will timeout at 60 seconds otherwise
                 $opts = [
-                    'http' => ['timeout' => 10]
+                    'http' => ['timeout' => 2]
                 ];
                 $context  = stream_context_create($opts);
                 $this->attempts++;
