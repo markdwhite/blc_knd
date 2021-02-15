@@ -25,6 +25,11 @@ use Log as LaravelLog;
  */
 class NPlusLogger implements Output
 {
+    public function boot()
+    {
+        //
+    }
+
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
