@@ -43,7 +43,7 @@ class CommandWithHealthcheck extends Command
                 '%s/cronjob?ip=%s&name=%s',
                 config('blc_knd.healthcheck_url'),
                 getLocalIp(),
-                $this->signature
+                strtok($this->signature, ' ')
             );
             do {
                 // Will timeout at 60 seconds otherwise
